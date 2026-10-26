@@ -43,33 +43,28 @@ Your enablement team decides how it works. Everyone else just works with Blaise.
 
 ## How it works
 
-```mermaid
-sequenceDiagram
-    participant T as Your team
-    participant B as Blaise
-    participant R as Your runner (blaise CLI)
-    participant C as Claude Code
+You assign an issue to Blaise. Blaise offers the session to a runner that fits, a machine of yours
+running the `blaise` CLI. The runner prepares the environment and starts the agent, the activity
+streams back to Blaise, and Blaise replies in the issue under its own name.
 
-    T->>B: Assign an issue to Blaise
-    B->>R: Offer the session to a runner that fits
-    R->>C: Prepare the environment, start the agent
-    C-->>B: Stream activity and transcript
-    B-->>T: Reply in the issue, under its own name
-```
-
-The `blaise` CLI makes outbound HTTPS connections only. No public address, open port or tunnel is
-needed, so a runner can be a laptop, a server, a container or a CI job.
+The CLI makes outbound HTTPS connections only. No public address, open port or tunnel is needed, so
+a runner can be a laptop, a server, a container or a CI job.
 
 ## Get started in four steps
 
-1. **Install the CLI.** It is a single executable and needs no Bun or Node.js.
+1. **Install the CLI.** With Homebrew, or run it straight from npm:
 
    ```sh
    brew install blaiseagent/cli/blaise
    ```
 
-   Other channels: `mise`, an install script for macOS, Linux and Windows, or
-   `npx @blaiseagent/cli`.
+   ```sh
+   npx @blaiseagent/cli --version
+   ```
+
+   The Homebrew build is a single executable that needs no Bun or Node.js. `npx` runs a small
+   launcher around the same binary and needs Node.js or Bun. `mise` and an install script for
+   macOS, Linux and Windows are also [available](https://askblaise.com/docs/cli/install).
 
 2. **Create an agent.** In the dashboard, add a **Local** agent under **Settings → Agents**.
 3. **Connect a machine.** Sign in once from the machine that should run sessions, then listen.
